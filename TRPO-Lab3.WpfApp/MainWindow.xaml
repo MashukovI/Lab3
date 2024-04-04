@@ -1,0 +1,50 @@
+﻿<Window x:Class="TRPO_Lab3.WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TRPO_Lab3.WpfApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Validation.Error="validationError">
+        <Image HorizontalAlignment="Left" Height="260" Margin="480,56,0,0" VerticalAlignment="Top" Width="246" Source="/Cylinder.png" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <TextBox TextWrapping="Wrap" Margin="10,91,625,298" Height="NaN" Width="NaN" TextChanged="TextBox_TextChanged">
+            <TextBox.Text>
+                <Binding Path="Radius" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <local:PositiveValueRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Радиус:" Margin="10,20,625,348" Width="165" FontSize="18" RenderTransformOrigin="0.498,0.498"/>
+        <Label Content="Высота:" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.349,-0.769" Height="32" Width="165" FontSize="18"/>
+        <Label Content="S=2πr(h+r)" HorizontalAlignment="Left" Margin="528,345,0,0" VerticalAlignment="Top" Height="51" Width="149" FontSize="28"/>
+        <TextBox TextWrapping="Wrap" Height="NaN" Margin="10,196,625,195" TextChanged="TextBox_TextChanged_1" RenderTransformOrigin="0.5,0.514" Width="NaN">
+            <TextBox.Text>
+                <Binding Path="Height" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <local:PositiveValueRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Площадь:" Margin="10,258,625,118" Width="165" FontSize="20"/>
+        <TextBlock x:Name="surfaceAreaTextBlock" TextWrapping="Wrap" Height="NaN" Margin="10,332,625,51" Width="NaN" RenderTransformOrigin="0.506,0.506">
+            <TextBlock.Text>
+                <Binding Path="SurfaceArea" UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBlock.Text>
+        </TextBlock>
+
+    </Grid>
+</Window>
