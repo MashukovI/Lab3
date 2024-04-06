@@ -1,0 +1,62 @@
+﻿@model CylinderModel
+<head><script src="//code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script></head>
+<form asp-action="Calculate" method="post">
+    <div style="float:left;">
+        <div class="form-group">
+            <label asp-for="Radius"></label>
+            <input asp-for="Radius" type="text" id="inputField1" class="form-control" style="width:300px;" />
+            <span asp-validation-for="Radius" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Height"></label>
+            <input asp-for="Height" type="text" id="inputField2" class="form-control" style="width:px;" />
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+        <button type="submit" id="submitButton" class="btn btn-primary" >Calculate</button>
+    </div>
+    <div style="float:right;">
+        <img src="~/image/Cylinder.png" style="width:300px; height:300px;" />
+        <div style="clear:both; margin-top:20px;">
+            <label style="font-size:50px;">S=2πr(h+r)</label>
+        </div>
+    </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#submitButton').attr('disabled', true);
+
+        $('#inputField1').on('input', function () {
+            var inputVal1 = $(this).val();
+            var inputVal2 = $('#inputField2').val();
+
+            if (inputVal1 === '' || inputVal1 === null || inputVal1 < 0 || inputVal2 === '' || inputVal2 === null || inputVal2 < 0 || isNaN(inputVal1) || isNaN(inputVal2)) {
+                $('#submitButton').attr('disabled', true);
+            } else {
+                $('#submitButton').attr('disabled', false);
+            }
+        });
+        $('#inputField2').on('input', function () {
+            var inputVal1 = $('#inputField1').val();
+            var inputVal2 = $(this).val();
+
+            if (inputVal1 === '' || inputVal1 === null || inputVal1 < 0 || inputVal2 === '' || inputVal2 === null || inputVal2 < 0 || isNaN(inputVal1) || isNaN(inputVal2)) {
+                $('#submitButton').attr('disabled', true);
+            } else {
+                $('#submitButton').attr('disabled', false);
+            }
+        });
+    });
+</script>
+@if (ViewBag.SurfaceArea != null)
+{
+    <div class="alert alert-success" role="alert" style="clear: both; margin-top: 20px; ">
+        Полная площадь цилиндра = @ViewBag.SurfaceArea.
+    </div>
+}
+
